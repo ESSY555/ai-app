@@ -44,12 +44,13 @@ export default function ViewContact() {
         alert(`Sending message to ${message.userName} at ${message.mobileNumber}`);
     };
 
-    const handleSearch = () => {
-        const lowerCaseQuery = searchQuery.toLowerCase();
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+        const lowerCaseQuery = query.toLowerCase();
         const filtered = messages.filter(
             (msg) =>
                 msg.userName.toLowerCase().includes(lowerCaseQuery) ||
-                msg.mobileNumber.includes(searchQuery)
+                msg.mobileNumber.includes(query)
         );
         setFilteredMessages(filtered);
     };
@@ -62,21 +63,16 @@ export default function ViewContact() {
         <div className="min-h-screen p-8 font-sans">
             <h1 className="text-2xl font-bold mb-4">Saved Contacts</h1>
 
-            <div className="mb-4 flex gap-4">
+            <div className="mb-4">
                 <input
                     type="text"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => handleSearch(e.target.value)}
                     placeholder="Search by name or number"
                     className="border px-4 py-2 rounded w-full"
                 />
-                <button
-                    onClick={handleSearch}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                >
-                    Search
-                </button>
             </div>
+
             {filteredMessages.length === 0 ? (
                 <p>No data found!</p>
             ) : (

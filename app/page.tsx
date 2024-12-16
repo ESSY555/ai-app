@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import AddContact from "./addContact/page"; // Ensure correct path to the file
+import AddContact from "./addContact/page";
 
 export default function Home() {
   return (
