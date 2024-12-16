@@ -46,7 +46,7 @@ export default function addContact() {
                 <input
                     type="text"
                     id="userName"
-                    className="w-full py-2 border rounded-lg focus:outline-none focus:border"
+                    className="w-full p-2 border rounded-lg focus:outline-none focus:border"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     placeholder="Enter your name"
@@ -54,7 +54,7 @@ export default function addContact() {
                 <input
                     type="text"
                     id="mobileNumber"
-                    className="w-full py-2 border rounded-lg focus:outline-none focus:border"
+                    className="w-full p-2 border rounded-lg focus:outline-none focus:border"
                     value={mobileNumber}
                     onChange={(e) => setMobileNumber(e.target.value)}
                     placeholder="Enter your mobile number"
@@ -62,14 +62,14 @@ export default function addContact() {
                 <input
                     type="text"
                     id="walletAddress"
-                    className="w-full py-2 border rounded-lg focus:outline-none focus:border"
+                    className="w-full p-2 border rounded-lg focus:outline-none focus:border"
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
                     placeholder="Enter your wallet address"
                 />
                 <button
                     type="submit"
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                    className="mt-4 px-4 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                 >
                     Submit
                 </button>
