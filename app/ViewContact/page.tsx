@@ -8,12 +8,13 @@ interface MessageData {
     userName: string;
     mobileNumber: string;
     walletAddress: string;
+    addPin: string;
 }
 
 export default function ViewContact() {
     const [messages, setMessages] = useState<MessageData[]>([]);
-    const [searchQuery, setSearchQuery] = useState(''); // Search query
-    const [filteredMessages, setFilteredMessages] = useState<MessageData[]>([]); // Filtered list of messages
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredMessages, setFilteredMessages] = useState<MessageData[]>([]);
 
     const fetchData = async () => {
         try {
@@ -23,7 +24,7 @@ export default function ViewContact() {
                 ...(doc.data() as Omit<MessageData, 'id'>),
             }));
             setMessages(data);
-            setFilteredMessages(data); // Initialize filteredMessages with all data
+            setFilteredMessages(data);
         } catch (error) {
             console.error('Error fetching data: ', error);
         }
@@ -32,8 +33,8 @@ export default function ViewContact() {
     const handleDelete = async (id: string) => {
         try {
             await deleteDoc(doc(db, 'message', id));
-            setMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== id)); // Update state
-            setFilteredMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== id)); // Update filtered messages
+            setMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== id));
+            setFilteredMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== id));
             alert('Contact deleted successfully');
         } catch (error) {
             console.error('Error deleting contact: ', error);
@@ -69,7 +70,7 @@ export default function ViewContact() {
                     value={searchQuery}
                     onChange={(e) => handleSearch(e.target.value)}
                     placeholder="Search by name or number"
-                    className="border px-4 py-2 rounded w-full"
+                    className="border-2 px-4 py-2 rounded w-full"
                 />
             </div>
 
@@ -83,6 +84,7 @@ export default function ViewContact() {
                                 <th className="border p-2 text-left">Name</th>
                                 <th className="border p-2 text-left">Mobile Number</th>
                                 <th className="border p-2 text-left">Wallet Address</th>
+                                    <th className="border p-2 text-left">Pin</th>
                                 <th className="border p-2 text-left">Actions</th>
                             </tr>
                         </thead>
@@ -92,6 +94,7 @@ export default function ViewContact() {
                                     <td className="border p-2">{message.userName}</td>
                                     <td className="border p-2">{message.mobileNumber}</td>
                                     <td className="border p-2">{message.walletAddress}</td>
+                                    <td className="border p-2">{message.addPin}</td> {/* Display addPin */}
                                     <td className="border p-2 flex gap-2">
                                         <button
                                             onClick={() => handleDelete(message.id)}
